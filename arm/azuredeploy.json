@@ -4,7 +4,7 @@
   "parameters": {
     "webAppName": {
       "type": "string",
-      "defaultValue": "[format('ArmPipelineWebApp-{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "ArmPipelineWebApp",
       "minLength": 2,
       "metadata": {
         "description": "Web app name."
