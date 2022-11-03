@@ -47,13 +47,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testAssemblyVer2: '**\*Tests.dll'
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    ConnectedServiceName: $(azureSubscriptionEndpoint)
-    appType: 'webApp'
-    WebAppName: 'ArmPipelineWebApp'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Azure subscription 1(7b246e08-0f97-4cac-9304-a97229beca9f)'
