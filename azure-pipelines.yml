@@ -50,6 +50,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
     appType: 'webApp'
     WebAppName: 'ArmPipelineWebApp'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'

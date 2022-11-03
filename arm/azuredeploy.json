@@ -2,6 +2,14 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "[format('webApp-{0}', uniqueString(resourceGroup().id))]",
+      "minLength": 2,
+      "metadata": {
+        "description": "Web app name."
+      }
+    },
     "projectName": {
       "type": "string",
       "minLength": 3,
@@ -19,9 +27,16 @@
     },
     "linuxFxVersion": {
       "type": "string",
-      "defaultValue": "php|7.0",
+      "defaultValue": "ASPNET|V4.8",
       "metadata": {
         "description": "The Runtime stack of current web app"
+      }
+    },
+    "repoUrl": {
+      "type": "string",
+      "defaultValue": " ",
+      "metadata": {
+        "description": "Optional Git Repo URL"
       }
     }
   },
@@ -62,7 +77,7 @@
         "family": "B",
         "capacity": 1
       },
-      "kind": "linux",
+      "kind": "windows",
       "properties": {
         "perSiteScaling": false,
         "reserved": true,
@@ -85,6 +100,20 @@
           "linuxFxVersion": "[parameters('linuxFxVersion')]"
         }
       }
+    },
+    {
+      "condition": "[contains(parameters('repoUrl'), 'http')]",
+      "type": "Microsoft.Web/sites/sourcecontrols",
+      "apiVersion": "2021-02-01",
+      "name": "[format('{0}/{1}', parameters('webAppName'), 'web')]",
+      "properties": {
+        "repoUrl": "[parameters('repoUrl')]",
+        "branch": "main",
+        "isManualIntegration": true
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+      ]
     }
   ],
   "outputs": {
