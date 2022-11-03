@@ -54,3 +54,10 @@ steps:
     appType: 'webApp'
     WebAppName: 'ArmPipelineWebApp'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(7b246e08-0f97-4cac-9304-a97229beca9f)'
+    appType: 'webApp'
+    appName: 'ArmPipeline'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
