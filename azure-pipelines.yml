@@ -55,5 +55,5 @@ steps:
     azureSubscription: 'Azure subscription 1(7b246e08-0f97-4cac-9304-a97229beca9f)'
     appType: 'webApp'
     appName: 'webapp-vzffiptp4g56y'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
