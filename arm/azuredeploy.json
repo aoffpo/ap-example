@@ -86,9 +86,7 @@
       ],
       "tags": "[parameters('resourceTags')]",
       "properties": {
-        "siteConfig": {
-          "linuxFxVersion": "[parameters('linuxFxVersion')]"
-        },
+        "siteConfig": {},
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
       },
       "resources": [
