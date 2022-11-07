@@ -52,7 +52,10 @@ steps:
 
 - task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectedServiceName: 'ArmPipeline-conn'
     ConnectionType: 'AzureRM'
     appType: 'webApp'
     WebAppName: 'webApp-vzffiptp4g56y'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+
+  
