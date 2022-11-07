@@ -2,6 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "projectName": {
+      "type": "string",
+      "defaultValue": "ArmPipeline",
+      "metadata": {
+        "description": "Azure Pipeline name."
+      }
+    },
     "webAppName": {
       "type": "string",
       "defaultValue": "[concat('webApp-', uniqueString(resourceGroup().id))]",
@@ -50,7 +57,8 @@
       "type": "object",
       "defaultValue": {
         "Environment": "Dev",
-        "Project": "Tutorial"
+        "Project": "Tutorial",
+        "Pipeline": "[parameters('projectName')]"
       }
     }
   },
