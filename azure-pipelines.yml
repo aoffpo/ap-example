@@ -50,10 +50,9 @@ steps:
 
 - task: PublishBuildArtifacts@1
 
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   inputs:
-    azureSubscription: 'Azure subscription 1(7b246e08-0f97-4cac-9304-a97229beca9f)'
+    ConnectionType: 'AzureRM'
     appType: 'webApp'
-    appName: 'webapp-vzffiptp4g56y'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+    WebAppName: 'webApp-vzffiptp4g56y'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
