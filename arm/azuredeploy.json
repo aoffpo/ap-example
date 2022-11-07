@@ -17,32 +17,20 @@
         "description": "Location for all resources."
       }
     },
-    "sku": {
+    "storageSKU": {
+      "type": "string",
+      "defaultValue": "Standard_LRS"
+    },
+    "appServiceSKU": {
       "type": "string",
       "defaultValue": "F1",
       "metadata": {
         "description": "The SKU of App Service Plan."
       }
     },
-    "language": {
+    "linuxFxVersion": {
       "type": "string",
-      "defaultValue": ".net",
-      "allowedValues": [
-        ".net",
-        "php",
-        "node",
-        "html"
-      ],
-      "metadata": {
-        "description": "The language stack of the app."
-      }
-    },
-    "helloWorld": {
-      "type": "bool",
-      "defaultValue": false,
-      "metadata": {
-        "description": "true = deploy a sample Hello World app."
-      }
+      "defaultValue": "ASPNET|V4.8"
     },
     "repoUrl": {
       "type": "string",
@@ -50,36 +38,24 @@
       "metadata": {
         "description": "Optional Git Repo URL"
       }
+    },
+    "branch": {
+      "type": "string",
+      "defaultValue": "dev",
+      "metadata": {
+        "description": "Repo Branch"
+      }
+    },
+    "resourceTags": {
+      "type": "object",
+      "defaultValue": {
+        "Environment": "Dev",
+        "Project": "Tutorial"
+      }
     }
   },
   "variables": {
-    "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]",
-    "gitRepoReference": {
-      ".net": "https://github.com/aoffpo/ap-example",
-      "node": "https://github.com/Azure-Samples/nodejs-docs-hello-world",
-      "php": "https://github.com/Azure-Samples/php-docs-hello-world",
-      "html": "https://github.com/Azure-Samples/html-docs-hello-world"
-    },
-    "gitRepoUrl": "[if(bool(parameters('helloWorld')), variables('gitRepoReference')[toLower(parameters('language'))], parameters('repoUrl'))]",
-    "configReference": {
-      ".net": {
-        "comments": ".Net app. No additional configuration needed."
-      },
-      "html": {
-        "comments": "HTML app. No additional configuration needed."
-      },
-      "php": {
-        "phpVersion": "7.4"
-      },
-      "node": {
-        "appSettings": [
-          {
-            "name": "WEBSITE_NODE_DEFAULT_VERSION",
-            "value": "12.15.0"
-          }
-        ]
-      }
-    }
+    "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]"
   },
   "resources": [
     {
@@ -88,8 +64,9 @@
       "name": "[variables('appServicePlanPortalName')]",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "[parameters('sku')]"
-      }
+        "name": "[parameters('appServiceSKU')]"
+      },
+      "tags": "[parameters('resourceTags')]"
     },
     {
       "type": "Microsoft.Web/sites",
@@ -99,13 +76,16 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
       ],
+      "tags": "[parameters('resourceTags')]",
       "properties": {
-        "siteConfig": "[variables('configReference')[parameters('language')]]",
+        "siteConfig": {
+          "linuxFxVersion": "[parameters('linuxFxVersion')]"
+        },
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
       },
       "resources": [
         {
-          "condition": "[contains(variables('gitRepoUrl'),'http')]",
+          "condition": "[contains(parameters('repoUrl'),'http')]",
           "type": "sourcecontrols",
           "apiVersion": "2020-06-01",
           "name": "web",
@@ -114,9 +94,9 @@
             "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
           ],
           "properties": {
-            "repoUrl": "[variables('gitRepoUrl')]",
-            "branch": "master",
-            "isManualIntegration": true
+            "repoUrl": "[parameters('repoUrl')]",
+            "branch": "[parameters('branch')]",
+            "isManualIntegration": false
           }
         }
       ]
