@@ -67,7 +67,7 @@ resource "azuredevops_build_definition" "arm_pipeline" {
   repository {
     repo_type             = "GitHub"
     repo_id               = var.vcs_repo_id
-    branch_name           = "restructure"
+    branch_name           = "main"
     yml_path              = "app/azure-pipelines.yml"
     service_connection_id = azuredevops_serviceendpoint_github.default.id
   }
