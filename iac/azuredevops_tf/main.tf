@@ -68,7 +68,7 @@ resource "azuredevops_build_definition" "arm_pipeline" {
     repo_type             = "GitHub"
     repo_id               = var.vcs_repo_id
     branch_name           = "main"
-    yml_path              = "azure-pipelines.yml"
+    yml_path              = "app/azure-pipelines.yml"
     service_connection_id = azuredevops_serviceendpoint_github.default.id
   }
 }
@@ -107,6 +107,6 @@ resource "azuredevops_resource_authorization" "azurerm_service_conn" {
 #    repo_type             = "GitHub"
 #    repo_id               = var.vcs_repo_id
 #    branch_name           = "main"
-#    yml_path              = "terrafrom/azure-pipelines-tf.yml"
+#    yml_path              = "terraform/azure-pipelines-tf.yml"
 #    service_connection_id = azuredevops_serviceendpoint_github.default.id
 #  }
