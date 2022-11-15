@@ -24,8 +24,7 @@ ARM - for azure resources and azure deploys
     deploy from command line
     create storage account for tfstate
 
-CREATE PRODUCTION DEPLOY via swap out.
-
+CREATE PRODUCTION DEPLOY via swap out (requires Azure subscription upgrade)
 
 Builds will now happen on commit to watched repository
  - scope to application and tests vs. IaC code to ensure the right projects build on change.
