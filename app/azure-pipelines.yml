@@ -24,7 +24,7 @@ steps:
     resourceGroupName: 'ArmPipeline-rg'
     location: 'East US'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/main/arm/azuredeploy.json'
+    csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/main/iac/azuredeploy_arm/azuredeploy.json'
     overrideParameters: '-projectName ArmPipeline'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
