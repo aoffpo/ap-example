@@ -16,7 +16,9 @@ TF - for Azure Devops project (ci/cd)
     configure project settings  + workflow artifacts and target repository (repo is also defined in azure deploy params)
         reference azure-pipelines file
 
-    TODO: Pipeline to terraform plan and apply on commit.
+    TODO: Pipeline for terraform plan and scope git trigger to appropriate folder..
+    TODO: Restructure entire project structure to ease scoping CI kickoffs
+    TODO: Add terraform.tfvars to Key Vault and source from there.
 ARM - for azure resources and azure deploys
     cli init
     Create azure deploy json
