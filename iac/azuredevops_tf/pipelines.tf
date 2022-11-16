@@ -28,7 +28,7 @@ resource "azuredevops_build_definition" "arm_pipeline" {
   }
 }
 
-## Terraform Pipeline
+## Azure Devops Resources Pipeline
 
 #resource "azuredevops_build_definition" "tf_pipeline" {
 #  project_id = azuredevops_project.tf_project.id
