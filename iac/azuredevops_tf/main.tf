@@ -49,7 +49,7 @@ resource "azuredevops_build_definition" "arm_pipeline" {
   project_id = azuredevops_project.tf_project.id
   name       = "ARMPipeline"
   # description= "Pipeline for .NET 4.7 web application"
-  path       = "\\"
+  path       = "\\app"
 
   ci_trigger {
     use_yaml = true
@@ -88,7 +88,7 @@ resource "azuredevops_resource_authorization" "azurerm_service_conn" {
 #  project_id = azuredevops_project.tf_project.id
 #  name       = "TFPipeline"
 #  description= "Pipeline for terraformed resources"
-#  path       = "\terraform"
+#  path       = "/iac"
 # 
 # ci_trigger {
 #    use_yaml = true
