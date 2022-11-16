@@ -4,8 +4,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- main
-- feature/*
+  branches:
+    include:
+      - main
+      - feature/*
+  paths:
+    include:
+      - app
 
 # Perform builds on pull requests prior to review and merge only for main branch
 pr:
