@@ -20,8 +20,10 @@ TF - for Azure Devops project (ci/cd)
     TODO: Restructure entire project structure to ease scoping CI kickoffs
     TODO: Add terraform.tfvars to Key Vault and source from there.
 ARM - for azure resources and azure deploys
-    cli init
-    Create azure deploy json
+    cli init 
+    create resource group
+    Create azure deploy json !! If this is done in terraform, create azuredeploy.json when creating deployment resource
+    create deployment group
     commit azure-pipelines.yml - use pipeline name and service connections defined in tf.main.
     deploy from command line
     create storage account for tfstate

@@ -2,9 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "resourceGroupName": {
-        "value": "AzExApp-dev-rg"
-    },
       "projectName": {
         "value": "ArmPipeline"
       },
@@ -16,7 +13,7 @@
       },
       "resourceTags": {
         "value": {
-          "environment": "dev",
+          "environment": "staging",
           "iac": "arm"
         }
       },
@@ -32,5 +29,7 @@
       "branch": {
         "value": "main"
     }
+
+    }
   }
-}
+  

@@ -2,6 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "resourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group name for all ARM and TF managed resources."
+      }
+    },
     "projectName": {
       "type": "string",
       "defaultValue": "ArmPipeline",
@@ -56,16 +62,36 @@
     "resourceTags": {
       "type": "object",
       "defaultValue": {
-        "Environment": "Dev",
-        "Project": "Tutorial",
-        "Pipeline": "[parameters('projectName')]"
+        "environment": "dev",
+        "iac": "arm",
+        "pipeline": "[parameters('projectName')]"
       }
     }
   },
   "variables": {
-    "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]"
+    "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]",
+    "storageAccountName": "[concat(parameters('projectName'), uniqueString(resourceGroup().id))]" 
   },
   "resources": [
+    {
+      "name": "linkedTemplateStorage",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "relativePath": "linked_templates/StorageAccount.json"
+        },
+        "parameters": {
+          "storageAccountName": {
+            "value": "[variables('storageAccountName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    },
     {
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2020-06-01",

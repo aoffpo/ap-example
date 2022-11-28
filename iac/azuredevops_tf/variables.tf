@@ -1,3 +1,12 @@
+variable "environment" {
+    type = string
+    description = "Target deployment environment name"
+    validation {
+        condition     = contains(["shared", "dev", "staging", "production"], var.environment)
+        error_message = "Valid values for var: environment are (dev, staging, production)."
+    } 
+}
+
 variable "azurerm_spn_tenantid" {
     type = string
     description = "Azure Tenant ID"
@@ -24,7 +33,23 @@ variable "vcs_repo_id" {
     description = "Repostory id in form {AccountName}/{RepoName}"
 }
 
+variable "vcs_repo_branch" {
+    type = string
+    description = "Branch for repository"
+}
+
+
 variable github_personal_access_token {
     type = string
     sensitive = true
+}
+
+variable "resource_group_location" {
+  default     = "eastus"
+  description = "Location of the resource group."
+}
+
+variable "resource_group_name" {
+  default     = "rg"
+  description = "The resource group name.  Must be unique in subscription"
 }
