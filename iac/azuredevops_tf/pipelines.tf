@@ -1,7 +1,7 @@
 ## Application Pipeline
 resource "azuredevops_variable_group" "pipeline" {
   project_id   = azuredevops_project.tf_project.id
-  name         = "Pipeline Variables"
+  name         = "pipeline-variables"
   description  = "azure-pipelines.yml variables"
   allow_access = true
 
@@ -20,6 +20,7 @@ resource "azuredevops_variable_group" "pipeline" {
     value =  var.resource_group_location
   }
 }
+
 resource "azuredevops_build_definition" "arm_pipeline" {
   project_id = azuredevops_project.tf_project.id
   name       = "ARMPipeline"

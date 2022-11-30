@@ -20,7 +20,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  - group: Terraform Pipeline Variables
+  - group: pipeline-variables
   - name: solution
     value: '**/*.sln'
   - name: buildPlatform 
