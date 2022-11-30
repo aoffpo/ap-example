@@ -19,6 +19,9 @@ resource "azuredevops_build_definition" "arm_pipeline" {
     }
   }
 
+  variable_groups = [
+    azuredevops_variable_group.pipeline.id
+  ]
   repository {
     repo_type             = "GitHub"
     repo_id               = var.vcs_repo_id
