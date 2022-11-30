@@ -31,7 +31,7 @@ resource "azuredevops_variable_group" "pipeline" {
   }
     variable {
     name         = "location"
-    secret_value =  var.resource_group_location
+    value =  var.resource_group_location
   }
 }
 resource "azuredevops_serviceendpoint_azurerm" "tf_conn" {
