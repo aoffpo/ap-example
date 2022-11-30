@@ -27,7 +27,7 @@ variables:
     value: 'Any CPU'
   - name: buildConfiguration
     value:  'Release'
-  -name: BRANCH_NAME
+  - name: BRANCH_NAME
     value: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
 
 variable-groups: 
