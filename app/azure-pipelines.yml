@@ -20,9 +20,17 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  - group: Terraform Pipeline Variables
+  - name: solution
+    value: '**/*.sln'
+  - name: buildPlatform 
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value:  'Release'
+  -name: BRANCH_NAME
+    value: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
+
+variable-groups: 
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
@@ -34,7 +42,7 @@ steps:
     resourceGroupName: $(resourceGroupName)
     location: $(location)
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/main/iac/azuredeploy_arm/azuredeploy.json'
+    csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/$(BRANCH_NAME)/iac/azuredeploy_arm/azuredeploy.json'
     overrideParameters: '-projectName ArmPipeline'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'

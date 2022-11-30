@@ -1,5 +1,25 @@
 ## Application Pipeline
+resource "azuredevops_variable_group" "pipeline" {
+  project_id   = azuredevops_project.tf_project.id
+  name         = "Pipeline Variables"
+  description  = "azure-pipelines.yml variables"
+  allow_access = true
 
+  variable {
+    name  = "resourceGroupName"
+    value = var.resource_group_name
+  }
+
+  variable {
+    name         = "subscriptionId"
+    secret_value =  "${data.azurerm_key_vault_secret.azurerm-subscription-id.value}"
+    is_secret    = true
+  }
+    variable {
+    name         = "location"
+    value =  var.resource_group_location
+  }
+}
 resource "azuredevops_build_definition" "arm_pipeline" {
   project_id = azuredevops_project.tf_project.id
   name       = "ARMPipeline"
