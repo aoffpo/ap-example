@@ -7,15 +7,15 @@ variable "environment" {
     } 
 }
 
-variable "azurerm_spn_tenantid" {
-    type = string
-    description = "Azure Tenant ID"
-} 
+#variable "azurerm_spn_tenantid" {
+#    type = string
+#    description = "Azure Tenant ID"
+#} 
 
-variable "azurerm_subscription_id" {
-    type = string
-    description = "Azure Subscription ID"
-}
+#variable "azurerm_subscription_id" {
+#    type = string
+#    description = "Azure Subscription ID"
+#}
 
 variable "azurerm_subscription_name" {
     default = "Azure subscription 1"
@@ -39,17 +39,19 @@ variable "vcs_repo_branch" {
 }
 
 
-variable github_personal_access_token {
-    type = string
-    sensitive = true
-}
+#variable github_personal_access_token {
+#    type = string
+#    sensitive = true
+#}
 
 variable "resource_group_location" {
+  type = string
   default     = "eastus"
   description = "Location of the resource group."
 }
 
 variable "resource_group_name" {
+  type = string
   default     = "rg"
   description = "The resource group name.  Must be unique in subscription"
 }

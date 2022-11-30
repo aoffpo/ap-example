@@ -3,25 +3,25 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "resourceGroupName": {
-        "value": "AzExApp-dev-rg"
-    },
+          "value": "$(resourceGroupName)"
+      },
       "projectName": {
-        "value": "ArmPipeline"
+          "value": "ArmPipeline"
       },
       "storageSKU": {
-        "value": "Standard_LRS"
+          "value": "Standard_LRS"
       },
       "appServiceSKU": {
-        "value": "F1"
+          "value": "F1"
       },
       "resourceTags": {
-        "value": {
-          "environment": "dev",
-          "iac": "arm"
-        }
+          "value": {
+              "environment": "dev",
+              "iac": "arm"
+          }
       },
       "location": {
-          "value": "eastus"
+          "value": "[location]"
       },
       "linuxFxVersion": {
           "value": "ASPNET|V4.8"
@@ -30,7 +30,7 @@
           "value": "https://github.com/aoffpo/ap-example"
       },
       "branch": {
-        "value": "main"
-    }
+          "value": "main"
+      }
   }
 }

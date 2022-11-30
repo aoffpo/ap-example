@@ -70,7 +70,7 @@
   },
   "variables": {
     "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]",
-    "storageAccountName": "[concat(parameters('projectName'), uniqueString(resourceGroup().id))]" 
+    "storageAccountName": "[concat(toLower(parameters('projectName')), uniqueString(resourceGroup().id))]" 
   },
   "resources": [
     {
@@ -80,7 +80,8 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "relativePath": "linked_templates/StorageAccount.json"
+          "uri": "https://raw.githubusercontent.com/aoffpo/ap-example/main/iac/azuredeploy_arm/linked_templates/storageAccount.json",
+          "contentVersion":"1.0.0.0"
         },
         "parameters": {
           "storageAccountName": {

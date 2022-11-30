@@ -1,0 +1,32 @@
+{
+    "resourceGroupName": {
+        "value": "${resourceGroupName}"
+    },
+    "projectName": {
+        "value": "ArmPipeline"
+    },
+    "storageSKU": {
+        "value": "Standard_LRS"
+    },
+    "appServiceSKU": {
+        "value": "F1"
+    },
+    "resourceTags": {
+        "value": {
+            "environment": "dev",
+            "iac": "arm"
+        }
+    },
+    "location": {
+        "value": "${location}"
+    },
+    "linuxFxVersion": {
+        "value": "ASPNET|V4.8"
+    },
+    "repoUrl": {
+        "value": "https://github.com/aoffpo/ap-example"
+    },
+    "branch": {
+        "value": "main"
+    }
+}
