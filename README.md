@@ -2,12 +2,9 @@ App Service Environment V3: https://learn.microsoft.com/en-us/azure/app-service/
 
 https://learn.microsoft.com/en-us/azure/app-service/environment/create-from-template
 
-?? Isolated App Service plans
-
-
 TF - for Azure Devops project (ci/cd)
     Authentication to Azure Devops/Azure - Service Principal
-    create personal access token
+    create personal access token in Azure
     terraform init
     terraform plan
     configure backend
@@ -16,9 +13,8 @@ TF - for Azure Devops project (ci/cd)
     configure project settings  + workflow artifacts and target repository (repo is also defined in azure deploy params)
         reference azure-pipelines file
 
-    TODO: Pipeline for terraform plan and scope git trigger to appropriate folder..
-    TODO: Restructure entire project structure to ease scoping CI kickoffs
-    TODO: Add terraform.tfvars to Key Vault and source from there.
+    TODO: Pipeline for terraform
+    TODO: Add tfstate file to Key Vault and reference terraform backend.
 ARM - for azure resources and azure deploys
     cli init 
     create resource group
@@ -30,9 +26,4 @@ ARM - for azure resources and azure deploys
 
 CREATE PRODUCTION DEPLOY via swap out (requires Azure subscription upgrade)
 
-Builds will now happen on commit to watched repository
- - scope to application and tests vs. IaC code to ensure the right projects build on change.
-
- .
-    
-
+Builds happen on feature branches, on pr and on merge.
