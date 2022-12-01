@@ -27,8 +27,6 @@ variables:
     value: 'Any CPU'
   - name: buildConfiguration
     value:  'Release'
-  - name: BRANCH_NAME
-    value: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
@@ -40,7 +38,6 @@ steps:
     resourceGroupName: $(resource-group-name)
     location: $(location)
     templateLocation: 'Linked artifact'
-    #csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/$(BRANCH_NAME)/iac/azuredeploy_arm/azuredeploy.json'
     csmFile: 'iac/azuredeploy_arm/azuredeploy.json'
     overrideParameters: '-projectName ArmPipeline'
     deploymentMode: 'Incremental'
@@ -72,7 +69,7 @@ steps:
     ConnectedServiceName: 'ArmPipeline-conn'
     ConnectionType: 'AzureRM'
     appType: 'webApp'
-    WebAppName: 'webApp-vzffiptp4g56y'
+    WebAppName: 'webApp-$(resource-group-name)'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
 
   

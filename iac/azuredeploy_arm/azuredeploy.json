@@ -11,7 +11,7 @@
     },
     "webAppName": {
       "type": "string",
-      "defaultValue": "[concat('webApp-', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[concat('webApp-', resourceGroup().name)]",
       "minLength": 2,
       "metadata": {
         "description": "Web app name."
