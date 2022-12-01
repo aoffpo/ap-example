@@ -21,6 +21,10 @@ pool:
 
 variables:
   - group: pipeline-variables
+  - name: location
+    value: $[variables.location]
+  - name: resourceGroupName
+    value: $[variables.resourceGroupName]
   - name: solution
     value: '**/*.sln'
   - name: buildPlatform 
@@ -37,8 +41,8 @@ steps:
     azureResourceManagerConnection: 'ArmPipeline-conn'
     subscriptionId: '7b246e08-0f97-4cac-9304-a97229beca9f'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: $[variables.resourceGroupName]
-    location: $[variables.location]
+    resourceGroupName: $(resourceGroupName)
+    location: $(location)
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/$(BRANCH_NAME)/iac/azuredeploy_arm/azuredeploy.json'
     overrideParameters: '-projectName ArmPipeline'
