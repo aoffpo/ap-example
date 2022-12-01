@@ -14,9 +14,6 @@
     "location": {
         "value": "${location}"
     },
-    "linuxFxVersion": {
-        "value": "ASPNET|V4.8"
-    },
     "repoUrl": {
         "value": "https://github.com/aoffpo/ap-example"
     },

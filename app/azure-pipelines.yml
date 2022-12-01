@@ -40,7 +40,8 @@ steps:
     resourceGroupName: $(resource-group-name)
     location: $(location)
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/$(BRANCH_NAME)/iac/azuredeploy_arm/azuredeploy.json'
+    #csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/$(BRANCH_NAME)/iac/azuredeploy_arm/azuredeploy.json'
+    csmFile: 'iac/azuredeploy_arm/azuredeploy.json'
     overrideParameters: '-projectName ArmPipeline'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
