@@ -6,13 +6,13 @@ terraform {
     }
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>3.0"
+      version = "~>3.23"
     }
   }
 }
 provider "azuread" {
   use_msi   = true
-  tenant_id = var.azurerm_spn_tenantid
+  tenant_id = "${data.azurerm_key_vault_secret.azurerm_spn_tenantid.value}"
 }
 provider "azuredevops" {}
 
@@ -36,24 +36,18 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
-resource "azurerm_resource_group_template_deployment" "default" {
+resource "azurerm_resource_group_template_deployment" "dev" {
   name                = "default-deploy"
   resource_group_name = azurerm_resource_group.rg.name
   deployment_mode     = "Incremental"
   template_content    = templatefile("../azuredeploy_arm/azuredeploy.json", {})
-  parameters_content  = templatefile("../azuredeploy_arm/azuredeploy.parameters.${var.environment}.json", {})
+  parameters_content  = templatefile("../azuredeploy_arm/linked_parameters/parameters.${var.environment}.json", 
+                        {
+                          resourceGroupName = "${var.resource_group_name}"
+                          location = "${var.resource_group_location}"
+                        })
   tags = {
     environment = var.environment
     iac         = "tf"
   }
 }
-
-resource "azurerm_resource_group" "common" {
-  location = var.resource_group_location
-  name     = "APAppEx-rg-common"
-  tags = {
-    environment = "shared"
-    iac         = "tf"
-  }
-}
-

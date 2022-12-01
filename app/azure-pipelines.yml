@@ -20,9 +20,13 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  - group: pipeline-variables
+  - name: solution
+    value: '**/*.sln'
+  - name: buildPlatform 
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value:  'Release'
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
@@ -31,10 +35,10 @@ steps:
     azureResourceManagerConnection: 'ArmPipeline-conn'
     subscriptionId: '7b246e08-0f97-4cac-9304-a97229beca9f'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'ArmPipeline-rg'
-    location: 'East US'
-    templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/aoffpo/ap-example/main/iac/azuredeploy_arm/azuredeploy.json'
+    resourceGroupName: $(resource-group-name)
+    location: $(location)
+    templateLocation: 'Linked artifact'
+    csmFile: 'iac/azuredeploy_arm/azuredeploy.json'
     overrideParameters: '-projectName ArmPipeline'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
@@ -65,7 +69,7 @@ steps:
     ConnectedServiceName: 'ArmPipeline-conn'
     ConnectionType: 'AzureRM'
     appType: 'webApp'
-    WebAppName: 'webApp-vzffiptp4g56y'
+    WebAppName: 'webApp-$(resource-group-name)'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
 
   

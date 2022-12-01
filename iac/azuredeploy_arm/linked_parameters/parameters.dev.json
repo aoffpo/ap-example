@@ -1,0 +1,23 @@
+{
+    "projectName": {
+        "value": "ArmPipeline"
+    },
+    "appServiceSKU": {
+        "value": "F1"
+    },
+    "resourceTags": {
+        "value": {
+            "environment": "dev",
+            "iac": "arm"
+        }
+    },
+    "location": {
+        "value": "${location}"
+    },
+    "repoUrl": {
+        "value": "https://github.com/aoffpo/ap-example"
+    },
+    "branch": {
+        "value": "main"
+    }
+}
