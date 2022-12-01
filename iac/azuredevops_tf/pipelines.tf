@@ -1,4 +1,7 @@
 ## Application Pipeline
+
+# scope group to env or each variable to env
+# if groups are scoped, create and reference azure-pipeline-${environment}.yml
 resource "azuredevops_variable_group" "pipeline" {
   project_id   = azuredevops_project.tf_project.id
   name         = "pipeline-variables"
@@ -6,14 +9,14 @@ resource "azuredevops_variable_group" "pipeline" {
   allow_access = true
 
   variable {
-    name  = "resourceGroupName"
+    name  = "resource-group-name"
     value = var.resource_group_name
   }
 
   variable {
     name         = "subscriptionId"
     secret_value =  "${data.azurerm_key_vault_secret.azurerm-subscription-id.value}"
-    is_secret    = true
+    is_secret    = false
   }
     variable {
     name         = "location"
@@ -21,6 +24,7 @@ resource "azuredevops_variable_group" "pipeline" {
   }
 }
 
+# scope to env "ARMPipeline-${environment}"
 resource "azuredevops_build_definition" "arm_pipeline" {
   project_id = azuredevops_project.tf_project.id
   name       = "ARMPipeline"
