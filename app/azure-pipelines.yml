@@ -22,9 +22,9 @@ pool:
 variables:
   - group: pipeline-variables
   - name: rg-location
-    value: $[variables.location]
+    value: $(location)
   - name: resourceGroupName
-    value: $[variables.resource-group-name]
+    value: $(resource-group-name)
   - name: solution
     value: '**/*.sln'
   - name: buildPlatform 
