@@ -1,12 +1,6 @@
 {
-    "resourceGroupName": {
-        "value": "${resourceGroupName}"
-    },
     "projectName": {
         "value": "ArmPipeline"
-    },
-    "storageSKU": {
-        "value": "Standard_LRS"
     },
     "appServiceSKU": {
         "value": "F1"

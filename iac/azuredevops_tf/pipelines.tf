@@ -15,8 +15,7 @@ resource "azuredevops_variable_group" "pipeline" {
 
   variable {
     name         = "subscriptionId"
-    secret_value =  "${data.azurerm_key_vault_secret.azurerm-subscription-id.value}"
-    is_secret    = false
+    value =  "${data.azurerm_key_vault_secret.azurerm-subscription-id.value}"
   }
     variable {
     name         = "location"

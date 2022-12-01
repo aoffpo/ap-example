@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "resourceGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "Resource group name for all ARM and TF managed resources."
-      }
-    },
     "projectName": {
       "type": "string",
       "defaultValue": "ArmPipeline",
@@ -30,20 +24,12 @@
         "description": "Location for all resources."
       }
     },
-    "storageSKU": {
-      "type": "string",
-      "defaultValue": "Standard_LRS"
-    },
     "appServiceSKU": {
       "type": "string",
       "defaultValue": "F1",
       "metadata": {
         "description": "The SKU of App Service Plan."
       }
-    },
-    "linuxFxVersion": {
-      "type": "string",
-      "defaultValue": "ASPNET|V4.8"
     },
     "repoUrl": {
       "type": "string",
@@ -89,6 +75,9 @@
           },
           "location": {
             "value": "[parameters('location')]"
+          },
+          "storageSKU": {
+            "value": "Standard_LRS"
           }
         }
       }
@@ -101,6 +90,7 @@
       "sku": {
         "name": "[parameters('appServiceSKU')]"
       },
+      "properties": {},
       "tags": "[parameters('resourceTags')]"
     },
     {
